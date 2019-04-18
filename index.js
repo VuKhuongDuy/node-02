@@ -1,15 +1,19 @@
 var http = require('http');
 
+let host = process.env.HOST || "0.0.0.0";
+let port = process.env.PORT || 3000;
+
 var server = http.createServer(function (req, res) {
     res.writeHead(200, { "Content-Type": "text/plain" });
     if (req.url === '/hello' && req.method === "GET")
-        res.end('world')
+        res.write('world')
     else if (req.url === '/hello' && req.method === 'POST')
-        res.end('world created')
+        res.write('world created')
     else if (req.url === '/hello' && req.method === 'PUT')
-        res.end('world updated')
+        res.write('world updated')
     else if (req.url === '/hello' && req.method === 'DELETE')
-        res.end('world deleted')
+        res.write('world deleted')
+    res.end();
 });
 
-server.listen(3000);
+server.listen(port,host, () => { console.log(`Success ${host} on ${port}`)});
